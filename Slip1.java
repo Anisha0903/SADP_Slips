@@ -25,19 +25,22 @@ class LowerCaseInputStream extends FilterInputStream {
     }
 }
 
-public class LowerCaseDecoratorDemo {
+public class LowerCaseDecoratorUserInput {
     public static void main(String[] args) {
-        String input = "HELLO JAVA DECORATOR PATTERN!";
-
-        byte[] inputBytes = input.getBytes();
+        System.out.println("Enter your text (Press Enter to finish):");
 
         try {
-            InputStream in = new ByteArrayInputStream(inputBytes);
+            // Take input from keyboard (System.in)
+            InputStream in = System.in;
+
+            // Wrap with lowercase decorator
             InputStream lowerIn = new LowerCaseInputStream(in);
 
             int c;
-            System.out.println("Converted Output:");
-            while ((c = lowerIn.read()) != -1) {
+            System.out.print("Converted to lowercase: ");
+            while ((c = lowerIn.read()) != -1) {  
+                // Stop if user presses Enter (ASCII 10)
+                if (c == '\n') break;
                 System.out.print((char) c);
             }
 
@@ -47,3 +50,6 @@ public class LowerCaseDecoratorDemo {
         }
     }
 }
+
+   
+        
