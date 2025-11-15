@@ -1,8 +1,7 @@
 import java.io.*;
 
-// Custom Decorator Class
+// Decorator Class
 class LowerCaseInputStream extends FilterInputStream {
-
     protected LowerCaseInputStream(InputStream in) {
         super(in);
     }
@@ -25,31 +24,31 @@ class LowerCaseInputStream extends FilterInputStream {
     }
 }
 
-public class LowerCaseDecoratorUserInput {
-    public static void main(String[] args) {
-        System.out.println("Enter your text (Press Enter to finish):");
+public class Slip1 {
+    public static void main(String[] args) throws IOException {
 
-        try {
-            // Take input from keyboard (System.in)
-            InputStream in = System.in;
+        System.out.print("Enter your text: ");
 
-            // Wrap with lowercase decorator
-            InputStream lowerIn = new LowerCaseInputStream(in);
+        // Step 1: Read full user input line
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String userInput = br.readLine();
 
-            int c;
-            System.out.print("Converted to lowercase: ");
-            while ((c = lowerIn.read()) != -1) {  
-                // Stop if user presses Enter (ASCII 10)
-                if (c == '\n') break;
-                System.out.print((char) c);
-            }
+        // Step 2: Convert it into bytes
+        ByteArrayInputStream byteIn = new ByteArrayInputStream(userInput.getBytes());
 
-            lowerIn.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Step 3: Wrap with your decorator
+        LowerCaseInputStream lowerIn = new LowerCaseInputStream(byteIn);
+
+        System.out.print("Converted to lowercase: ");
+
+        int c;
+        while ((c = lowerIn.read()) != -1) {
+            System.out.print((char) c);
         }
+
+        lowerIn.close();
     }
 }
-
-   
-        
+ 
+            
+    
