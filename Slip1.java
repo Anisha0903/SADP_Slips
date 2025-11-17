@@ -1,6 +1,5 @@
 import java.io.*;
 
-// Decorator Class
 class LowerCaseInputStream extends FilterInputStream {
     protected LowerCaseInputStream(InputStream in) {
         super(in);
@@ -29,14 +28,11 @@ public class Slip1 {
 
         System.out.print("Enter your text: ");
 
-        // Step 1: Read full user input line
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userInput = br.readLine();
 
-        // Step 2: Convert it into bytes
         ByteArrayInputStream byteIn = new ByteArrayInputStream(userInput.getBytes());
 
-        // Step 3: Wrap with your decorator
         LowerCaseInputStream lowerIn = new LowerCaseInputStream(byteIn);
 
         System.out.print("Converted to lowercase: ");
